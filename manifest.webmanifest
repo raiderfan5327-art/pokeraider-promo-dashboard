@@ -1,7 +1,7 @@
 {
-  "name": "PokéRaider Promo Price Tracker",
+  "name": "PokéRaider Pokémon Card Price Tracker",
   "short_name": "PokéRaider",
-  "description": "Track live Pokémon promo card prices, watchlist movement, and historical trends.",
+  "description": "Track live prices, images, alerts, and historical trends across the full Pokémon card catalog.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
