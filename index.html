@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#080a0c" />
+  <meta name="description" content="PokéRaider mobile Pokémon promo card price dashboard." />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" href="./icons/icon.svg" />
+  <link rel="apple-touch-icon" href="./icons/icon.svg" />
+  <link rel="stylesheet" href="./styles.css" />
+  <title>PokéRaider Promo Tracker</title>
+</head>
+<body>
+  <div id="auth-screen" class="auth-screen">
+    <section class="auth-card">
+      <div class="brand-lockup">
+        <div class="brand-mark">PR</div>
+        <div>
+          <h1>Poké<span>Raider</span></h1>
+          <p>Promo Price Tracker</p>
+        </div>
+      </div>
+      <h2 id="auth-title">Sign in</h2>
+      <p class="muted">Your watchlist and price history stay private in your PokéRaider account.</p>
+      <form id="auth-form">
+        <label>Email<input id="auth-email" type="email" autocomplete="email" required /></label>
+        <label>Password<input id="auth-password" type="password" autocomplete="current-password" minlength="8" required /></label>
+        <button id="auth-submit" class="primary-button" type="submit">Sign in</button>
+      </form>
+      <button id="auth-toggle" class="text-button" type="button">Create an account</button>
+      <p id="auth-message" class="form-message" role="status"></p>
+    </section>
+  </div>
+
+  <div id="app" class="app-shell" hidden>
+    <header class="app-header">
+      <div>
+        <div class="brand-row">
+          <h1>Poké<span>Raider</span></h1>
+          <span id="live-pill" class="live-pill"><i></i> LIVE</span>
+        </div>
+        <p>Promo Price Tracker</p>
+      </div>
+      <button id="open-search" class="icon-button" aria-label="Search promo cards">⌕</button>
+    </header>
+
+    <main>
+      <section class="stats-grid" aria-label="Dashboard summary">
+        <article class="stat-card featured">
+          <span>Market pulse</span>
+          <strong id="market-pulse">—</strong>
+          <small id="market-label">Add cards to begin</small>
+        </article>
+        <article class="stat-card">
+          <span>24h change</span>
+          <strong id="average-change">—</strong>
+          <small>Watchlist average</small>
+        </article>
+        <article class="stat-card">
+          <span>Watchlist value</span>
+          <strong id="watchlist-value">$0.00</strong>
+          <small id="watchlist-count">0 tracked cards</small>
+        </article>
+      </section>
+
+      <section class="panel chart-panel">
+        <div class="section-heading">
+          <div><span class="eyebrow">PROMO PRICE TRENDS</span><h2 id="chart-title">Your watchlist</h2></div>
+          <button id="refresh-prices" class="small-button">Refresh</button>
+        </div>
+        <div id="chart-legend" class="chart-legend"></div>
+        <div class="chart-wrap"><canvas id="price-chart" aria-label="Promo price history chart"></canvas></div>
+        <div class="range-tabs" role="group" aria-label="Chart range">
+          <button data-range="7" class="active">7D</button>
+          <button data-range="30">30D</button>
+          <button data-range="90">90D</button>
+          <button data-range="365">1Y</button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-heading">
+          <div><span class="eyebrow">WATCHLIST</span><h2>Tracked promos</h2></div>
+          <button id="add-first-card" class="small-button">Add card</button>
+        </div>
+        <div id="watchlist" class="watchlist"></div>
+        <div id="empty-watchlist" class="empty-state" hidden>
+          <div class="empty-icon">◇</div>
+          <h3>No promos tracked yet</h3>
+          <p>Search for a promo card, choose its condition and printing, then add it to your watchlist.</p>
+          <button class="primary-button open-search-copy">Search promo cards</button>
+        </div>
+      </section>
+
+      <section class="panel movers-panel">
+        <div class="section-heading"><div><span class="eyebrow">TOP MOVERS</span><h2>Your watchlist today</h2></div></div>
+        <div class="movers-grid">
+          <div><h3 class="positive">Top gainers</h3><ol id="gainers"></ol></div>
+          <div><h3 class="negative">Top losers</h3><ol id="losers"></ol></div>
+        </div>
+      </section>
+
+      <section id="setup-banner" class="setup-banner" hidden>
+        <strong>Pricing connection needs one final key</strong>
+        <p>The dashboard and database are online. Add the JustTCG API key to the Supabase secret named <code>JUSTTCG_API_KEY</code>.</p>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Primary navigation">
+      <button class="active"><span>⌂</span>Home</button>
+      <button id="nav-trends"><span>⌁</span>Trends</button>
+      <button id="nav-search"><span>⌕</span>Search</button>
+      <button id="sign-out"><span>↪</span>Sign out</button>
+    </nav>
+  </div>
+
+  <dialog id="search-dialog" class="search-dialog">
+    <form method="dialog" class="dialog-header">
+      <div><span class="eyebrow">ADD TO WATCHLIST</span><h2>Find a promo card</h2></div>
+      <button class="icon-button" value="cancel" aria-label="Close search">×</button>
+    </form>
+    <form id="search-form" class="search-form">
+      <input id="search-input" type="search" placeholder="Try Pikachu, Mew, Charizard…" minlength="2" required />
+      <button class="primary-button" type="submit">Search</button>
+    </form>
+    <p id="search-status" class="muted" role="status">Searches are limited to Pokémon promo cards.</p>
+    <div id="search-results" class="search-results"></div>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
