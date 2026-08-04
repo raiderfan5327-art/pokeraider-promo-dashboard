@@ -1,6 +1,11 @@
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.110.8/+esm";
 import { APP_CONFIG } from "./config.js";
 
+const alertStyles = document.createElement("link");
+alertStyles.rel = "stylesheet";
+alertStyles.href = "./alerts.css";
+document.head.append(alertStyles);
+
 const supabase = createClient(APP_CONFIG.supabaseUrl, APP_CONFIG.supabasePublishableKey, {
   auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true },
 });
