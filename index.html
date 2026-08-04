@@ -62,6 +62,11 @@
           <strong id="watchlist-value">$0.00</strong>
           <small id="watchlist-count">0 tracked cards</small>
         </article>
+        <article class="stat-card">
+          <span>Unread alerts</span>
+          <strong id="unread-alerts">0</strong>
+          <small>Hourly monitoring</small>
+        </article>
       </section>
 
       <section class="panel chart-panel">
@@ -93,6 +98,19 @@
         </div>
       </section>
 
+      <section id="alerts-panel" class="panel alerts-panel">
+        <div class="section-heading">
+          <div><span class="eyebrow">PRICE ALERTS</span><h2>Recent activity</h2></div>
+          <button id="mark-alerts-read" class="small-button">Mark read</button>
+        </div>
+        <div id="alerts-list" class="alerts-list"></div>
+        <div id="empty-alerts" class="empty-state" hidden>
+          <div class="empty-icon">♢</div>
+          <h3>No alerts yet</h3>
+          <p>Your cards are checked hourly. Alerts appear when a card moves at least 5% or crosses one of your price targets.</p>
+        </div>
+      </section>
+
       <section class="panel movers-panel">
         <div class="section-heading"><div><span class="eyebrow">TOP MOVERS</span><h2>Your watchlist today</h2></div></div>
         <div class="movers-grid">
@@ -111,6 +129,7 @@
       <button class="active"><span>⌂</span>Home</button>
       <button id="nav-trends"><span>⌁</span>Trends</button>
       <button id="nav-search"><span>⌕</span>Search</button>
+      <button id="nav-alerts"><span>♢</span>Alerts</button>
       <button id="sign-out"><span>↪</span>Sign out</button>
     </nav>
   </div>
@@ -128,7 +147,22 @@
     <div id="search-results" class="search-results"></div>
   </dialog>
 
+  <dialog id="alert-dialog" class="search-dialog settings-dialog">
+    <form method="dialog" class="dialog-header">
+      <div><span class="eyebrow">CARD ALERT SETTINGS</span><h2 id="alert-card-name">Price alerts</h2></div>
+      <button class="icon-button" value="cancel" aria-label="Close alert settings">×</button>
+    </form>
+    <form id="alert-form" class="alert-form">
+      <label class="toggle-row"><span>Enable alerts for this card</span><input id="alerts-enabled" type="checkbox" /></label>
+      <label>24-hour move threshold (%)<input id="alert-move" type="number" min="0.5" max="100" step="0.5" value="5" required /></label>
+      <label>Alert when price rises above ($)<input id="alert-above" type="number" min="0" step="0.01" placeholder="Optional sell target" /></label>
+      <label>Alert when price falls below ($)<input id="alert-below" type="number" min="0" step="0.01" placeholder="Optional buy target" /></label>
+      <button class="primary-button" type="submit">Save alert settings</button>
+    </form>
+  </dialog>
+
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <script type="module" src="./app.js"></script>
+  <script type="module" src="./alerts.js"></script>
 </body>
 </html>
