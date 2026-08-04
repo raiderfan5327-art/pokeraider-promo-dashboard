@@ -20,7 +20,7 @@ Never put the private key in `config.js`, `app.js`, GitHub, or another browser-v
 
 ## Live site
 
-After GitHub Pages deploys, the dashboard will be available at:
+GitHub Pages deployment is enabled for:
 
 `https://raiderfan5327-art.github.io/pokeraider-promo-dashboard/`
 
@@ -38,3 +38,5 @@ After GitHub Pages deploys, the dashboard will be available at:
 ## Data-provider note
 
 The JustTCG personal plan has usage and licensing limits. Review its current terms before using this dashboard commercially or opening access to other users.
+
+_Last deployment trigger: 2026-08-04_
