@@ -4,12 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#080a0c" />
-  <meta name="description" content="PokéRaider mobile Pokémon promo card price dashboard." />
+  <meta name="description" content="PokéRaider mobile Pokémon card price dashboard." />
   <link rel="manifest" href="./manifest.webmanifest" />
   <link rel="icon" href="./icons/icon.svg" />
   <link rel="apple-touch-icon" href="./icons/icon.svg" />
   <link rel="stylesheet" href="./styles.css" />
-  <title>PokéRaider Promo Tracker</title>
+  <title>PokéRaider Card Tracker</title>
 </head>
 <body>
   <div id="auth-screen" class="auth-screen">
@@ -18,11 +18,11 @@
         <div class="brand-mark">PR</div>
         <div>
           <h1>Poké<span>Raider</span></h1>
-          <p>Promo Price Tracker</p>
+          <p>Pokémon Card Price Tracker</p>
         </div>
       </div>
       <h2 id="auth-title">Sign in</h2>
-      <p class="muted">Your watchlist and price history stay private in your PokéRaider account.</p>
+      <p class="muted">Your card watchlist, alerts, and price history stay private in your PokéRaider account.</p>
       <form id="auth-form">
         <label>Email<input id="auth-email" type="email" autocomplete="email" required /></label>
         <label>Password<input id="auth-password" type="password" autocomplete="current-password" minlength="8" required /></label>
@@ -40,9 +40,9 @@
           <h1>Poké<span>Raider</span></h1>
           <span id="live-pill" class="live-pill"><i></i> LIVE</span>
         </div>
-        <p>Promo Price Tracker</p>
+        <p>Pokémon Card Price Tracker</p>
       </div>
-      <button id="open-search" class="icon-button" aria-label="Search promo cards">⌕</button>
+      <button id="open-search" class="icon-button" aria-label="Search Pokémon cards">⌕</button>
     </header>
 
     <main>
@@ -71,11 +71,11 @@
 
       <section class="panel chart-panel">
         <div class="section-heading">
-          <div><span class="eyebrow">PROMO PRICE TRENDS</span><h2 id="chart-title">Your watchlist</h2></div>
+          <div><span class="eyebrow">CARD PRICE TRENDS</span><h2 id="chart-title">Your watchlist</h2></div>
           <button id="refresh-prices" class="small-button">Refresh</button>
         </div>
         <div id="chart-legend" class="chart-legend"></div>
-        <div class="chart-wrap"><canvas id="price-chart" aria-label="Promo price history chart"></canvas></div>
+        <div class="chart-wrap"><canvas id="price-chart" aria-label="Pokémon card price history chart"></canvas></div>
         <div class="range-tabs" role="group" aria-label="Chart range">
           <button data-range="7" class="active">7D</button>
           <button data-range="30">30D</button>
@@ -86,15 +86,15 @@
 
       <section class="panel">
         <div class="section-heading">
-          <div><span class="eyebrow">WATCHLIST</span><h2>Tracked promos</h2></div>
+          <div><span class="eyebrow">WATCHLIST</span><h2>Tracked cards</h2></div>
           <button id="add-first-card" class="small-button">Add card</button>
         </div>
         <div id="watchlist" class="watchlist"></div>
         <div id="empty-watchlist" class="empty-state" hidden>
           <div class="empty-icon">◇</div>
-          <h3>No promos tracked yet</h3>
-          <p>Search for a promo card, choose its condition and printing, then add it to your watchlist.</p>
-          <button class="primary-button open-search-copy">Search promo cards</button>
+          <h3>No cards tracked yet</h3>
+          <p>Search the full Pokémon catalog, choose a condition and printing, then add the card to your watchlist.</p>
+          <button class="primary-button open-search-copy">Search Pokémon cards</button>
         </div>
       </section>
 
@@ -136,14 +136,14 @@
 
   <dialog id="search-dialog" class="search-dialog">
     <form method="dialog" class="dialog-header">
-      <div><span class="eyebrow">ADD TO WATCHLIST</span><h2>Find a promo card</h2></div>
+      <div><span class="eyebrow">FULL POKÉMON CATALOG</span><h2>Find any card</h2></div>
       <button class="icon-button" value="cancel" aria-label="Close search">×</button>
     </form>
     <form id="search-form" class="search-form">
-      <input id="search-input" type="search" placeholder="Try Pikachu, Mew, Charizard…" minlength="2" required />
+      <input id="search-input" type="search" placeholder="Name, set, or card number…" minlength="2" required />
       <button class="primary-button" type="submit">Search</button>
     </form>
-    <p id="search-status" class="muted" role="status">Searches are limited to Pokémon promo cards.</p>
+    <p id="search-status" class="muted" role="status">Searches cover the full English Pokémon card catalog, including promos and regular sets.</p>
     <div id="search-results" class="search-results"></div>
   </dialog>
 
@@ -163,6 +163,7 @@
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <script type="module" src="./app.js"></script>
+  <script type="module" src="./catalog.js"></script>
   <script type="module" src="./alerts.js"></script>
 </body>
 </html>
