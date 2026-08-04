@@ -1,0 +1,19 @@
+{
+  "name": "PokéRaider Promo Price Tracker",
+  "short_name": "PokéRaider",
+  "description": "Track live Pokémon promo card prices, watchlist movement, and historical trends.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#080a0c",
+  "theme_color": "#080a0c",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "./icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
