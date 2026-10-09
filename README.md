@@ -4,6 +4,8 @@ A personal, AI-assisted web application for searching Pokémon cards and followi
 
 [Ryan Steele — portfolio](docs/portfolio.md) · [Support writing sample](docs/search-support-guide.md) · [Application link](https://raiderfan5327-art.github.io/pokeraider-promo-dashboard/)
 
+**More personal projects:** [Pulse Feed](projects/pulse-feed.md) · [Local Home AI](projects/local-home-ai.md) · [Rei](projects/rei.md)
+
 ## The problem
 
 Collectors need to distinguish a card’s set, printing, and condition when comparing prices. This project brings card search, a selected watchlist, historical prices, and alert settings into a mobile-oriented interface.
